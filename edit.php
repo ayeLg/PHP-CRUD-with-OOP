@@ -14,14 +14,16 @@ if(isset($_REQUEST['id'])) {
 if(isset($_REQUEST['submit'])) {
   
  $id = $_POST['id'];
+
  
   $name = $_POST['name'];
   $description = $_POST['des'];
+  $status = $_POST['status'];
   $update = new Crud($con);
-  $update->update($name,$description,$id);
+  $update->update($name,$description,$status,$id);
   $result = $update->result;
   if(!empty($result)) {
-    header("location: categories.php?");
+    header("location: index.php");
     return true;
   }
 }
@@ -56,6 +58,15 @@ if(isset($_REQUEST['submit'])) {
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Category Description</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="des"><?= $edit->description ?? ''; ?></textarea>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Select Category status</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="status">
+      <option>Category status</option>
+        <option value="1" <?php echo $edit->status === 1 ? "selected" : ""; ?>>Active</option>
+        <option value="0" <?php echo $edit->status === 0 ? "selected" : ""; ?>>Inactive</option>
+        
+      </select>
     </div>
     <button type="submit" class="btn btn-success" name="submit">Update</button>
   </form>

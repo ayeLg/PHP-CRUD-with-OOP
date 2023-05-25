@@ -30,14 +30,15 @@ Class Crud {
     $this->result = $stm->fetch(PDO::FETCH_OBJ);
   }
 
-  public function update($name,$description,$id) {
+  public function update($name,$description,$status,$id) {
    
-    $query = "update categories set name = :name, description = :description
+    $query = "update categories set name = :name, description = :description, status = :status
     WHERE id = :id";
 
     $stm = $this->con->prepare($query);
     $stm->bindParam(':name', $name);
     $stm->bindParam(':description', $description);
+    $stm->bindParam(':status', $status);
     $stm->bindParam(':id', $id);
     $this->result = $stm->execute();
     

@@ -3,10 +3,11 @@
 
 if(isset($_REQUEST['submit'])) {
 
-  if($_POST['name'] !== ""  && $_POST["des"] !== ""){
+  if($_POST['name'] !== ""  && $_POST["des"] !== "" &&   $_POST['status'] !== ""){
     $name = $_POST['name'];
     $description = $_POST["des"];
-    $status = 1;
+    $status = $_POST['status'];
+
     try{
         $insert = new Crud($con);
       $insert->insert($name,$description,$status);
@@ -39,6 +40,16 @@ if(isset($_REQUEST['submit'])) {
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Category Description</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="des"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Select Category status</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="status">
+
+        <option>Category status</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+        
+      </select>
     </div>
     <button type="submit" class="btn btn-success" name="submit">Submit</button>
   </form>

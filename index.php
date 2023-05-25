@@ -12,7 +12,7 @@ if(isset($_REQUEST['id'])) {
   $delete = $delete->result;
 
   if(!empty($delete)) {
-    header("location: categories.php");
+    header("location: ".$_SERVER['PHP_SELF']);
     return true;
   }
 }
@@ -47,6 +47,7 @@ if(isset($_REQUEST['id'])) {
               <th scope="col">id</th>
               <th scope="col">Category Name</th>
               <th scope="col">Category Description</th>
+              <th scope="col">Category Status</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -61,9 +62,12 @@ if(isset($_REQUEST['id'])) {
                 echo "<td>". ++$id. "</td>";
                 echo "<td>". $res['name']. "</td>";
                 echo "<td>". $res['description']. "</td>";
-              
-                echo "<td><a class='btn btn-info' href='edit.php?id=".$res['id']."'>Edit</a></td>";
-                echo "<td><a class='btn btn-danger'  href=".$_SERVER['PHP_SELF'] ."?id=".$res['id'].">Delete</a></td>";
+                if($res['status'] == 1 ){
+                  echo "<td>Active</td>";
+                } else {
+                  echo "<td>Inactive</td>";
+                }
+                echo "<td><a class='btn btn-info' href='edit.php?id=".$res['id']."'>Edit</a><a class='btn btn-danger'  href=".$_SERVER['PHP_SELF'] ."?id=".$res['id'].">Delete</a></td>";
           
          
 
